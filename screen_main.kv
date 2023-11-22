@@ -7,7 +7,7 @@
             id: layout_header
             orientation: "horizontal"
             padding: 20
-			spacing: 50
+			spacing: 20
 			size_hint: 1, 0.15
 
 			MDLabel:
@@ -16,7 +16,7 @@
 				halign: 'center'
 				valign: 'middle'
 				bold: True
-				font_size: 32
+				font_size: 48
 				color: 0, 0, 0
                     
             Image:
@@ -40,26 +40,51 @@
 				halign: 'center'
 				valign: 'middle'    
 				bold: True
-				font_size: 24
+				font_size: 32
 				color: 1, 1, 1
-				size_hint_y: 0.1
 
 		MDBoxLayout:
-			orientation: "vertical"
-			md_bg_color: app.theme_cls.accent_color
+			orientation: "horizontal"
 			size_hint: 1, 0.75
 			padding:10
 			spacing:10
 
-			MDLabel:
-				id: text_notif
-				text:"Machine is in Standby Mode, Please Turn on Main Switch to start"
-				halign: 'center'
-				valign: 'middle' 
-				font_size: 44
-				bold: True
-				size_hint_y: 2
-				color: 0, 0, 0
+			MDBoxLayout:
+				id: layout_image
+				size_hint_x: 0.65
+
+			MDGridLayout:
+				size_hint_x: 0.35
+				cols: 2
+
+				MDLabel:
+					text: "Label 1"
+					bold: True
+					font_size: 32
+					halign: 'center'
+					valign: 'middle'
+
+				MDLabel:
+					text: "Variabel 1"
+					bold: True
+					font_size: 32
+					halign: 'center'
+					valign: 'middle'
+				
+				MDLabel:
+					text: "Label 2"
+					bold: True
+					font_size: 32
+					halign: 'center'
+					valign: 'middle'
+
+				MDLabel:
+					text: "Variabel 2"
+					bold: True
+					font_size: 32
+					halign: 'center'
+					valign: 'middle'
+
 
 
 
