@@ -75,8 +75,6 @@ class ScreenMain(MDBoxLayout):
         Clock.schedule_once(self.delayed_init)
         Clock.schedule_interval(self.reguler_check, 1)
 
-
-
     def delayed_init(self, dt):
         self.cap = cv2.VideoCapture(0)
         if not self.cap.isOpened():
