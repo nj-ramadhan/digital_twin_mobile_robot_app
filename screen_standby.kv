@@ -1,0 +1,67 @@
+#:kivy 2.1.0
+
+<ScreenStandby>:
+    MDBoxLayout:
+        orientation: "vertical"
+		# header layout
+        MDBoxLayout:
+            id: layout_header
+            orientation: "horizontal"
+            padding: 20
+			spacing: 50
+			size_hint: 1, 0.15
+
+			MDLabel:
+				id: subtitle            
+				text: "WATER DISPENSER MACHINE"
+				halign: 'center'
+				valign: 'middle'
+				bold: True
+				font_size: 32
+				color: 0, 0, 0
+                    
+            Image:
+                id: logo
+                source:'asset/Main_Logo.png'
+                size_hint_x: 0.25
+                allow_stretch: True                   
+
+
+		# choose product layout
+		MDBoxLayout:
+			id: layout_title
+			orientation: "vertical"
+			md_bg_color: app.theme_cls.primary_color
+			size_hint: 1, 0.1
+			padding:10
+			spacing:10
+
+			MDLabel:
+				text: "STANDBY"
+				halign: 'center'
+				valign: 'middle'    
+				bold: True
+				font_size: 24
+				color: 1, 1, 1
+				size_hint_y: 0.1
+
+		MDBoxLayout:
+			orientation: "vertical"
+			md_bg_color: app.theme_cls.accent_color
+			size_hint: 1, 0.75
+			padding:10
+			spacing:10
+
+			MDLabel:
+				id: text_notif
+				text:"Machine is in Standby Mode, Please Turn on Main Switch to start"
+				halign: 'center'
+				valign: 'middle' 
+				font_size: 44
+				bold: True
+				size_hint_y: 2
+				color: 0, 0, 0
+
+
+
+				
