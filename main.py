@@ -95,4 +95,4 @@ class DigitalTwinMobileRobotApp(MDApp):
 
 
 if __name__ == '__main__':
-    DigitalTwinMobileRobotA().run()
+    DigitalTwinMobileRobotApp().run()
