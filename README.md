@@ -1,2 +1,2 @@
-# CNC Pipe Bending Machine
- Embedded system application for Pipe Bending CNC Machine
+# DIGITAL TWIN MOBILE ROBOT AR
+Software for Digital Twin Mobile Robot AR Competition 
