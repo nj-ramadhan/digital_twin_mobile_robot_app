@@ -140,6 +140,7 @@ class ScreenMain(MDBoxLayout):
 
     def reguler_check(self, dt):
         ret, img = self.cap.read()
+        img_bg = plt.imread("asset/Image_Field.png")
         if not ret:
             print("Error: Unable to capture frame")
 
@@ -175,6 +176,8 @@ class ScreenMain(MDBoxLayout):
                         cv2.putText(img, f"ID: {id}", (x_start, y_text), cv2.FONT_HERSHEY_PLAIN, 1, (0, 0, 255), 2)
                         cv2.putText(img, f"V: {velocity:.2f} cm/s", (x_start, y_text + 20), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0), 2)
 
+                        # img_new = Image.composite(img, img_bg, mask=bbox)
+
                     # Simpan frame dan waktu sebelumnya untuk perhitungan selanjutnya
                     self.prev_frames[id] = center
                     self.prev_times[id] = time.time()
@@ -189,6 +192,7 @@ class ScreenMain(MDBoxLayout):
         # img_new = Image.composite(img, img_bg, mask=mask)
 
         self.ax.imshow(img)
+        # self.ax.imshow(img_new)
         self.ax.tick_params(left = False, right = False , labelleft = False, labelbottom = False, bottom = False) 
 
         self.ids.layout_image.clear_widgets()
