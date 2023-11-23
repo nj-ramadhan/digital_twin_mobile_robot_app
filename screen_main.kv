@@ -21,69 +21,139 @@
                     
             Image:
                 id: logo
-                source:'asset/Main_Logo.png'
+                source:'asset/Logo_Main.png'
                 size_hint_x: 0.25
                 allow_stretch: True                   
 
-
-		# choose product layout
-		MDBoxLayout:
-			id: layout_title
-			orientation: "vertical"
-			md_bg_color: app.theme_cls.primary_color
-			size_hint: 1, 0.1
-			padding:10
-			spacing:10
-
-			MDLabel:
-				text: "MAIN SCREEN"
-				halign: 'center'
-				valign: 'middle'    
-				bold: True
-				font_size: 32
-				color: 1, 1, 1
-
 		MDBoxLayout:
 			orientation: "horizontal"
-			size_hint: 1, 0.75
+			size_hint: 1, 0.85
 			padding:10
 			spacing:10
 
 			MDBoxLayout:
-				id: layout_image
 				size_hint_x: 0.65
 
-			MDGridLayout:
+				MDRelativeLayout:
+					MDBoxLayout:
+						id: layout_image
+						pos_hint: {"center_x": .5, "center_y": .5}
+
+					Image:
+						size_hint_y: 0.75
+						pos_hint: {"center_x": .5, "center_y": .5}
+						source:'asset/Image_Field.png'
+						allow_stretch: True
+
+			MDBoxLayout:
 				size_hint_x: 0.35
-				cols: 2
+				orientation: "vertical"
+				padding:20
+				spacing:50
 
-				MDLabel:
-					text: "Label 1"
-					bold: True
-					font_size: 32
-					halign: 'center'
-					valign: 'middle'
+				MDBoxLayout:
+					orientation: "horizontal"
+					spacing:50
 
-				MDLabel:
-					text: "Variabel 1"
-					bold: True
-					font_size: 32
-					halign: 'center'
-					valign: 'middle'
-				
-				MDLabel:
-					text: "Label 2"
-					bold: True
-					font_size: 32
-					halign: 'center'
-					valign: 'middle'
+					Image:
+						id: logo_team_red
+						size_hint_x: 0.25
+						source:'asset/Logo_POLMAN.png'
+						allow_stretch: True   
 
-				MDLabel:
-					text: "Variabel 2"
-					bold: True
-					font_size: 32
-					halign: 'center'
-					valign: 'middle'
+					MDBoxLayout:
+						size_hint_x: 0.75
+						orientation: "vertical"
+						padding:20
+						spacing:20				
+
+						MDLabel:
+							id: name_team_red
+							text: "K21"
+							bold: True
+							font_size: 40
+							color: 0.7, 0, 0
+							halign: 'center'
+							valign: 'middle'
+
+						MDLabel:
+							id: institution_team_red
+							text: "Politeknik Manufaktur Bandung"
+							bold: True
+							font_size: 20
+							color: 1, 1, 1
+							halign: 'center'
+							valign: 'middle'
+							md_bg_color: 0.7, 0, 0
+
+				MDBoxLayout:
+					orientation: "horizontal"
+					spacing:50
+
+					Image:
+						id: logo_team_blue
+						size_hint_x: 0.25
+						source:'asset/Logo_ITB.png'
+						allow_stretch: True   
+
+					MDBoxLayout:
+						size_hint_x: 0.75
+						orientation: "vertical"
+						padding:20
+						spacing:20				
+
+						MDLabel:
+							id: name_team_blue
+							text: "DAGOROBO"
+							bold: True
+							font_size: 40
+							color: 0, 0, 0.7
+							halign: 'center'
+							valign: 'middle'
+
+						MDLabel:
+							id: institution_team_blue
+							text: "Institut Teknologi Bandung"
+							bold: True
+							font_size: 20
+							color: 1, 1, 1
+							halign: 'center'
+							valign: 'middle'
+							md_bg_color: 0, 0, 0.7
+
+				MDBoxLayout:
+					orientation: "horizontal"
+					spacing:50
+
+					Image:
+						size_hint_x: 0.25
+						source:'asset/Logo_Live.png'
+						allow_stretch: True   		
+
+					MDLabel:
+						text: "KONTES ROBOT INDONESIA TINGKAT NASIONAL"
+						bold: True
+						font_size: 30
+						color: 0, 0, 0
+						halign: 'left'
+						valign: 'middle'
+
+				MDBoxLayout:
+					orientation: "horizontal"
+					spacing:50
+
+					Image:
+						size_hint_x: 0.35
+						source:'asset/Logo_KRTMI.png'
+						allow_stretch: True   		
+
+					MDLabel:
+						text: "KONTES ROBOT TEMATIK INDONESIA"
+						bold: True
+						font_size: 40
+						color: 0, 0, 0
+						halign: 'left'
+						valign: 'middle'
 
 
 

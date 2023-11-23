@@ -2,6 +2,7 @@ import numpy as np
 import time
 import cv2
 import cv2.aruco as aruco
+from PIL import Image, ImageDraw
 import os
 from kivymd.app import MDApp
 from kivymd.toast import toast
@@ -90,6 +91,7 @@ class ScreenMain(MDBoxLayout):
         self.fig = plt.figure()
         self.fig.tight_layout()
         self.ax = self.fig.add_subplot(111)
+        self.ax.tick_params(left = False, right = False , labelleft = False, labelbottom = False, bottom = False) 
         self.ids.layout_image.add_widget(FigureCanvasKivyAgg(self.fig))    
 
     def loadImages(self, path):
@@ -177,10 +179,20 @@ class ScreenMain(MDBoxLayout):
                     self.prev_frames[id] = center
                     self.prev_times[id] = time.time()
 
+        # img_bg = Image.open("asset/Image_Field.png").convert("RGBA")
+        # mask = Image.new("L", img_bg.size, 0)
+        # draw = ImageDraw.Draw(mask)
+        # draw.ellipse((300, 1500, 1220, 2250), fill=185)
+        # # x,y = img.size
+        # # img2 = Image.open("/home/crow.jpg").convert("RGBA").resize((x,y))
+
+        # img_new = Image.composite(img, img_bg, mask=mask)
+
         self.ax.imshow(img)
+        self.ax.tick_params(left = False, right = False , labelleft = False, labelbottom = False, bottom = False) 
+
         self.ids.layout_image.clear_widgets()
         self.ids.layout_image.add_widget(FigureCanvasKivyAgg(self.fig))
-
 
 class DigitalTwinMobileRobotApp(MDApp):
     def __init__(self, **kwargs):
