@@ -1,17 +1,18 @@
 import numpy as np
 import time
+import math
 import cv2
 import cv2.aruco as aruco
-from PIL import Image, ImageDraw
+import imutils 
 import os
 from kivymd.app import MDApp
-from kivymd.toast import toast
 from kivy.lang import Builder
 from kivy.core.window import Window
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivy.clock import Clock
 from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 from kivy.properties import ObjectProperty
 from kivy.properties import StringProperty
@@ -75,9 +76,22 @@ class ScreenMain(MDBoxLayout):
         super(ScreenMain, self).__init__(**kwargs)
         Clock.schedule_once(self.delayed_init)
         Clock.schedule_interval(self.reguler_check, 1)
+        self.coordinatesList = [[0, 0], 
+                           [200, 200], 
+                           [120, 250]]
+        self.coordinatesList_prev = self.coordinatesList
 
     def delayed_init(self, dt):
-        self.cap = cv2.VideoCapture(0)
+        self.cap = cv2.VideoCapture(1)
+        # self.cap.set(cv2.CAP_PROP_FRAME_WIDTH,640)
+        # self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT,480)
+        # self.cap.set(cv2.CAP_PROP_FRAME_WIDTH,320)
+        # self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT,240)
+        # cap1.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+        # cap1.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+        # self.cap.set(cv2.CAP_PROP_FPS, 30)
+        # self.cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
+
         if not self.cap.isOpened():
             print("Error: Unable to access the camera")
             return
@@ -138,9 +152,24 @@ class ScreenMain(MDBoxLayout):
     def distance_cm(self, p1, p2, pixels_to_cm):
         return self.distance(p1, p2) * pixels_to_cm
 
+    def angle_calculate(self, pt1, pt2, trigger = 0):  # function which returns angle between two points in the range of 0-359
+        angle_list_1 = list(range(359,0,-1))
+        #angle_list_1 = angle_list_1[90:] + angle_list_1[:90]
+        angle_list_2 = list(range(359,0,-1))
+        angle_list_2 = angle_list_2[-90:] + angle_list_2[:-90]
+        x=pt2[0]-pt1[0] # unpacking tuple
+        y=pt2[1]-pt1[1]
+        angle=int(math.degrees(math.atan2(y,x))) #takes 2 points nad give angle with respect to horizontal axis in range(-180,180)
+        if trigger == 0:
+            angle = angle_list_2[angle]
+        else:
+            angle = angle_list_1[angle]
+        return int(angle)
+
     def reguler_check(self, dt):
+        pos = np.array([2, 1])
         ret, img = self.cap.read()
-        img_bg = plt.imread("asset/Image_Field.png")
+
         if not ret:
             print("Error: Unable to capture frame")
 
@@ -165,6 +194,18 @@ class ScreenMain(MDBoxLayout):
 
                         x_start = int(bbox[0][0][0])
                         y_start = int(bbox[0][0][1])
+                        angle = 45 + math.atan2(y_start - center[1], center[0] - x_start ) * ( 180 / np.pi )
+
+                        print(f'bbox:{bbox}')
+                        print(f'angle:{angle}')
+
+                        # angle = self.angle_calculate(x_start, y_start)
+
+                        # print("id: ",id,"center:",center)
+                        self.ids.id_robot.text = f'{id}'
+                        self.ids.position_robot.text = f'X:{center[0]:.2f}, Y:{center[1]:.2f}'
+                        self.ids.velocity_robot.text = f'{velocity:.2f}'
+                        self.ids.angle_robot.text = f'{angle:.2f}'
 
                         # Ambil ukuran teks kecepatan
                         (text_width, text_height), _ = cv2.getTextSize(f"V: {velocity:.2f} cm/s", cv2.FONT_HERSHEY_PLAIN, 1.5, 2)
@@ -182,19 +223,103 @@ class ScreenMain(MDBoxLayout):
                     self.prev_frames[id] = center
                     self.prev_times[id] = time.time()
 
-        # img_bg = Image.open("asset/Image_Field.png").convert("RGBA")
-        # mask = Image.new("L", img_bg.size, 0)
-        # draw = ImageDraw.Draw(mask)
-        # draw.ellipse((300, 1500, 1220, 2250), fill=185)
-        # # x,y = img.size
-        # # img2 = Image.open("/home/crow.jpg").convert("RGBA").resize((x,y))
+        # # img_bg = Image.open("asset/Image_Field.png").convert("RGBA")
+        # # mask = Image.new("L", img_bg.size, 0)
+        # # draw = ImageDraw.Draw(mask)
+        # # draw.ellipse((300, 1500, 1220, 2250), fill=185)
+        # # # x,y = img.size
+        # # # img2 = Image.open("/home/crow.jpg").convert("RGBA").resize((x,y))
 
-        # img_new = Image.composite(img, img_bg, mask=mask)
+        # # img_new = Image.composite(img, img_bg, mask=mask)
 
-        self.ax.imshow(img)
-        # self.ax.imshow(img_new)
-        self.ax.tick_params(left = False, right = False , labelleft = False, labelbottom = False, bottom = False) 
+        # self.ax.imshow(img)
+        # # self.ax.imshow(img_new)
 
+        # imageList = ["asset/Logo_ITB.png", "asset/Logo_POLMAN.png", "asset/Logo_KRTMI.png"]
+        
+        # randMovementCoordinates = [[np.random.randint(-10,10), np.random.randint(-10,10)], 
+        #                    [np.random.randint(-10,10), np.random.randint(-10,10)], 
+        #                    [np.random.randint(-10,10), np.random.randint(-10,10)]]
+        # self.coordinatesList = np.add(self.coordinatesList_prev, randMovementCoordinates)
+        # print(self.coordinatesList)
+
+        # self.fig = plt.figure()
+        # self.fig, (self.ax1, self.ax2) = plt.subplots(1, 2, facecolor=('#EEEEEE'))
+        self.fig, self.ax1 = plt.subplots(1, 1, facecolor=('#EEEEEE'))
+        # self.ax1 = self.fig.add_subplot(121, facecolor=('#EEEEEE'))
+        self.ax1.set_facecolor('#EEEEEE')
+        self.ax1.set_xlim(0, 640)
+        self.ax1.set_ylim(0, 480)
+        # self.ax1.set_aspect('box')
+        # self.ax1.set_box_aspect(aspect=(1, 1))
+
+        bg = mpimg.imread("asset/Image_Field.png")
+        self.ax1.imshow(bg, extent=[0, 640, 0, 480])
+
+        # imgplot = [None] * len(imageList)
+        # for i in range(3):
+        #     imageFile = imageList[i]
+        #     img=mpimg.imread(imageFile)
+        #     tx, ty = self.coordinatesList[i]
+        #     self.ax.imshow(img, extent=(tx, tx + 30, ty, ty + 30))
+        try:
+            self.coordinates = center            
+            logo = mpimg.imread("asset/Logo_POLMAN.png")
+            rot_logo = imutils.rotate(logo, angle=angle) 
+
+            tx, ty = self.coordinates
+            self.ax1.imshow(rot_logo, extent=(tx - 15, tx + 15, 480 - ty - 15, 480 - ty + 15))
+            # self.ax2.imshow(img)
+            # self.coordinatesList_prev = self.coordinatesList
+            self.coordinates_prev = self.coordinates
+        except:
+            pass
+
+        if(self.coordinates[0] >= 315 and self.coordinates[0] <= 325):
+            if(self.coordinates[1] >= 235 and self.coordinates[1] <= 260):
+                self.point = 100
+
+            elif(self.coordinates[1] >= 395 and self.coordinates[1] <= 305):
+                self.point = 50        
+        
+            elif(self.coordinates[1] >= 65 and self.coordinates[1] <= 75):
+                self.point = 50 
+            
+            else:
+                self.point = 0
+
+        elif(self.coordinates[0] >= 175 and self.coordinates[0] <= 195):
+            if(self.coordinates[1] >= 315 and self.coordinates[1] <= 325):
+                self.point = 50
+
+            elif(self.coordinates[1] >= 145 and self.coordinates[1] <= 165):
+                self.point = 50        
+
+            else:
+                self.point = 0
+
+        elif(self.coordinates[0] >= 465 and self.coordinates[0] <= 475):
+            if(self.coordinates[1] >= 315 and self.coordinates[1] <= 325):
+                self.point = 50
+
+            elif(self.coordinates[1] >= 145 and self.coordinates[1] <= 165):
+                self.point = 50           
+
+            else:
+                self.point = 0
+        else:
+            self.point = 0
+
+        if(self.point > 0):
+            self.ids.value_point.md_bg_color = (.0, .6, .0, 1)
+
+        else:
+            self.ids.value_point.md_bg_color = (.6, .0, .0, 1)
+
+        self.ids.value_point.text = f'{self.point}'
+
+        self.ax1.tick_params(left = False, right = False , labelleft = False, labelbottom = False, bottom = False)
+        # self.ax2.tick_params(left = False, right = False , labelleft = False, labelbottom = False, bottom = False)
         self.ids.layout_image.clear_widgets()
         self.ids.layout_image.add_widget(FigureCanvasKivyAgg(self.fig))
 
@@ -208,8 +333,8 @@ class DigitalTwinMobileRobotApp(MDApp):
         self.theme_cls.accent_palette = "BlueGray"
         self.icon = 'asset/Icon_Logo.png'
         Window.fullscreen = 'auto'
-        Window.borderless = True
-        # Window.size = 1080, 640
+        # Window.borderless = True
+        # Window.size = 1920, 786
         # Window.allow_screensaver = True
 
         screen = Builder.load_file('main.kv')

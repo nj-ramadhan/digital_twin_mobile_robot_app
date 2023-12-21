@@ -32,21 +32,14 @@
 			spacing:10
 
 			MDBoxLayout:
-				size_hint_x: 0.65
-
+				size_hint_x: 0.6
 				MDRelativeLayout:
 					MDBoxLayout:
 						id: layout_image
 						pos_hint: {"center_x": .5, "center_y": .5}
 
-					Image:
-						size_hint_y: 0.75
-						pos_hint: {"center_x": .5, "center_y": .5}
-						source:'asset/Image_Field.png'
-						allow_stretch: True
-
 			MDBoxLayout:
-				size_hint_x: 0.35
+				size_hint_x: 0.4
 				orientation: "vertical"
 				padding:20
 				spacing:50
@@ -68,93 +61,198 @@
 						spacing:20				
 
 						MDLabel:
-							id: name_team_red
-							text: "K21"
+							id: name_robot
+							text: "ROBOT ID"
 							bold: True
-							font_size: 40
-							color: 0.7, 0, 0
+							font_size: 30
+							color: 0.08, 0.4, 0.6
 							halign: 'center'
 							valign: 'middle'
 
 						MDLabel:
-							id: institution_team_red
-							text: "Politeknik Manufaktur Bandung"
+							id: id_robot
+							text: "ID ROBOT"
 							bold: True
-							font_size: 20
+							font_size: 40
 							color: 1, 1, 1
 							halign: 'center'
 							valign: 'middle'
-							md_bg_color: 0.7, 0, 0
+							md_bg_color: 0.08, 0.4, 0.6
 
-				MDBoxLayout:
-					orientation: "horizontal"
-					spacing:50
-
-					Image:
-						id: logo_team_blue
-						size_hint_x: 0.25
-						source:'asset/Logo_ITB.png'
-						allow_stretch: True   
-
-					MDBoxLayout:
-						size_hint_x: 0.75
-						orientation: "vertical"
-						padding:20
-						spacing:20				
-
-						MDLabel:
-							id: name_team_blue
-							text: "DAGOROBO"
-							bold: True
-							font_size: 40
-							color: 0, 0, 0.7
-							halign: 'center'
-							valign: 'middle'
-
-						MDLabel:
-							id: institution_team_blue
-							text: "Institut Teknologi Bandung"
-							bold: True
-							font_size: 20
-							color: 1, 1, 1
-							halign: 'center'
-							valign: 'middle'
-							md_bg_color: 0, 0, 0.7
-
-				MDBoxLayout:
-					orientation: "horizontal"
-					spacing:50
-
-					Image:
-						size_hint_x: 0.25
-						source:'asset/Logo_Live.png'
-						allow_stretch: True   		
-
+				MDGridLayout:
+					cols:2
+					padding:20
+					spacing:20	
+					
 					MDLabel:
-						text: "KONTES ROBOT INDONESIA TINGKAT NASIONAL"
+						text: "POSITION"
 						bold: True
 						font_size: 30
-						color: 0, 0, 0
-						halign: 'left'
+						color: 0.08, 0.4, 0.6
+						halign: 'center'
 						valign: 'middle'
+
+					MDLabel:
+						id: position_robot
+						text: "X:10.2, Y:5.3"
+						bold: True
+						font_size: 30
+						color: 0.08, 0.4, 0.6
+						halign: 'center'
+						valign: 'middle'
+
+					MDLabel:
+						text: "ANGLE"
+						bold: True
+						font_size: 30
+						color: 0.08, 0.4, 0.6
+						halign: 'center'
+						valign: 'middle'
+
+					MDLabel:
+						id: angle_robot
+						text: "0.5 deg"
+						bold: True
+						font_size: 30
+						color: 0.08, 0.4, 0.6
+						halign: 'center'
+						valign: 'middle'
+
+					MDLabel:
+						text: "VELOCITY"
+						bold: True
+						font_size: 30
+						color: 0.08, 0.4, 0.6
+						halign: 'center'
+						valign: 'middle'
+
+					MDLabel:
+						id: velocity_robot
+						text: "11.4 cm/s"
+						bold: True
+						font_size: 30
+						color: 0.08, 0.4, 0.6
+						halign: 'center'
+						valign: 'middle'
+
+				# MDBoxLayout:
+				# 	orientation: "horizontal"
+				# 	spacing:50
+
+				# 	Image:
+				# 		id: logo_team_blue
+				# 		size_hint_x: 0.25
+				# 		source:'asset/Logo_KRTMI.png'
+				# 		allow_stretch: True   
+
+				# 	MDBoxLayout:
+				# 		size_hint_x: 0.75
+				# 		orientation: "vertical"
+				# 		padding:20
+				# 		spacing:20				
+
+				# 		MDLabel:
+				# 			id: name_team_blue
+				# 			text: "ROBOT 02"
+				# 			bold: True
+				# 			font_size: 40
+				# 			color: 0, 0, 0.7
+				# 			halign: 'center'
+				# 			valign: 'middle'
+
+				# 		MDLabel:
+				# 			id: institution_team_blue
+				# 			text: "KRTMI"
+				# 			bold: True
+				# 			font_size: 20
+				# 			color: 1, 1, 1
+				# 			halign: 'center'
+				# 			valign: 'middle'
+				# 			md_bg_color: 0, 0, 0.7
+
+				# MDGridLayout:
+				# 	cols:2
+				# 	padding:20
+				# 	spacing:20	
+
+				# 	MDLabel:
+				# 		text: "POSITION"
+				# 		bold: True
+				# 		font_size: 30
+				# 		color: 0, 0, 0.7
+				# 		halign: 'center'
+				# 		valign: 'middle'
+
+				# 	MDLabel:
+				# 		id: position_team_blue
+				# 		text: "X:1.5, Y:3.3"
+				# 		bold: True
+				# 		font_size: 30
+				# 		color: 0, 0, 0.7
+				# 		halign: 'center'
+				# 		valign: 'middle'
+
+				# 	MDLabel:
+				# 		text: "VELOCITY"
+				# 		bold: True
+				# 		font_size: 30
+				# 		color: 0, 0, 0.7
+				# 		halign: 'center'
+				# 		valign: 'middle'
+
+				# 	MDLabel:
+				# 		id: velocity_team_blue
+				# 		text: "12cm/s"
+				# 		bold: True
+				# 		font_size: 30
+				# 		color: 0, 0, 0.7
+				# 		halign: 'center'
+				# 		valign: 'middle'
+
+				# MDBoxLayout:
+				# 	orientation: "horizontal"
+				# 	spacing:50
+
+				# 	Image:
+				# 		size_hint_x: 0.25
+				# 		source:'asset/Logo_Live.png'
+				# 		allow_stretch: True   		
+
+				# 	MDLabel:
+				# 		text: "KONTES ROBOT INDONESIA TINGKAT NASIONAL"
+				# 		bold: True
+				# 		font_size: 30
+				# 		color: 0, 0, 0
+				# 		halign: 'left'
+				# 		valign: 'middle'
 
 				MDBoxLayout:
 					orientation: "horizontal"
 					spacing:50
 
-					Image:
-						size_hint_x: 0.35
-						source:'asset/Logo_KRTMI.png'
-						allow_stretch: True   		
+					# Image:
+					# 	size_hint_x: 0.35
+					# 	source:'asset/Logo_KRTMI.png'
+					# 	allow_stretch: True   		
 
 					MDLabel:
-						text: "KONTES ROBOT TEMATIK INDONESIA"
+						text: "POINT"
 						bold: True
-						font_size: 40
-						color: 0, 0, 0
+						font_size: 50
+						color: 0.08, 0.4, 0.6
 						halign: 'left'
 						valign: 'middle'
+						size_hint_x: 0.35
 
+					MDLabel:
+						id: value_point
+						text: "0"
+						bold: True
+						font_size: 80
+						color: 1, 1, 1
+						halign: 'center'
+						valign: 'middle'
+						md_bg_color: 0.0, 0.6, 0.0
 
 
 
