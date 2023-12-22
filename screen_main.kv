@@ -228,12 +228,7 @@
 
 				MDBoxLayout:
 					orientation: "horizontal"
-					spacing:50
-
-					# Image:
-					# 	size_hint_x: 0.35
-					# 	source:'asset/Logo_KRTMI.png'
-					# 	allow_stretch: True   		
+					spacing:50		
 
 					MDLabel:
 						text: "POINT"
@@ -254,6 +249,18 @@
 						valign: 'middle'
 						md_bg_color: 0.0, 0.6, 0.0
 
+				MDBoxLayout:
+					orientation: "horizontal"
+					spacing:50		
+
+					MDLabel:
+						id: aruco_detected
+						text: ""
+						bold: True
+						font_size: 30
+						color: 0.08, 0.4, 0.6
+						halign: 'center'
+						valign: 'middle'
 
 
 				
