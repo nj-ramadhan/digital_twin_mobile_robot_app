@@ -85,7 +85,7 @@ class ScreenMain(MDBoxLayout):
         self.coordinatesList_prev = self.coordinatesList
 
     def delayed_init(self, dt):
-        self.cap = cv2.VideoCapture(0)
+        self.cap = cv2.VideoCapture(1)
 
         if not self.cap.isOpened():
             print("Error: Unable to access the camera")
@@ -184,7 +184,7 @@ class ScreenMain(MDBoxLayout):
                         angle = 45 + math.atan2(y_start - center[1], center[0] - x_start ) * ( 180 / np.pi )
 
                         #assume that all robot id is <= 21
-                        if(id <= 21):
+                        if(id <= 25):
                             self.ids.id_robot.text = f'{id}'
                             self.ids.position_robot.text = f'X:{center[0]:.2f}, Y:{center[1]:.2f}'
                             self.ids.velocity_robot.text = f'{velocity:.2f}'
@@ -270,7 +270,7 @@ class DigitalTwinMobileRobotApp(MDApp):
         self.icon = 'asset/Icon_Logo.png'
         # Window.fullscreen = 'auto'
         # Window.borderless = True
-        Window.size = 1920, 768
+        Window.size = 1920, 1080
         # Window.allow_screensaver = True
 
         screen = Builder.load_file('main.kv')

@@ -7,7 +7,7 @@ def grab_frame(cap):
     return cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
 
 #Initiate the two cameras
-cap1 = cv2.VideoCapture(2)
+cap1 = cv2.VideoCapture(1)
 cap1.set(cv2.CAP_PROP_FRAME_WIDTH,320)
 cap1.set(cv2.CAP_PROP_FRAME_HEIGHT,240)
 # cap1.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
